@@ -1,0 +1,25 @@
+<footer class="grid-container">
+  <div class="grid-item">
+    <h4>Contact</h4>
+
+    <p>Client Support</p>
+    <p>Careers</p>
+    <p>Customer Protection</p>
+  </div>
+
+  <div class="grid-item">
+    <h4>Author</h4>
+
+    <p>{{ author }}</p>
+    <p>{{ group }}</p>
+    <p>{{ projectTitle }}</p>
+  </div>
+
+  <div class="grid-item">
+    <h4>Informations</h4>
+
+    <p (click)="navigateTo('/terms-and-conditions')">Terms and conditions</p>
+    <p (click)="navigateTo('/policy')">Privacy policy</p>
+    <p>Data processing policy</p>
+  </div>
+</footer>

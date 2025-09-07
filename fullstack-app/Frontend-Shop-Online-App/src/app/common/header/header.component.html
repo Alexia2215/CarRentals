@@ -1,0 +1,24 @@
+<header class="banner">
+  <button class="text-btn" mat-button (click)="onHomePage()">Home</button>
+  <button class="text-btn" mat-button (click)="onMyAccountPage()">My account</button>
+  <button class="text-btn" mat-button (click)="onCheckoutPage()">Rental summary</button>
+  <div style="display: contents;">
+    <p style="color: white; font-size: 20px">|</p>
+    @if (user && user.userRole == 'ADMIN') {
+      <button class="text-btn" mat-button (click)="onAdminPage()">Admin</button>
+
+      <div style="width: 16px"></div>
+
+      <button class="text-btn" mat-button (click)="onLogout()">Logout</button>
+    } @else if (user) {
+      <button class="text-btn" mat-button (click)="onAdminPage()">Hello {{ user.name }}</button>
+
+      <div style="width: 16px"></div>
+
+      <button class="text-btn" mat-button (click)="onLogout()">Logout</button>
+    } @else {
+      <button class="text-btn" mat-button (click)="onLoginPage()">Login</button>
+    }
+
+  </div>
+</header>

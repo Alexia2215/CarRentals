@@ -1,0 +1,88 @@
+<div class="page">
+
+  @if (total > 0) {
+  <h2 class="lbl-title">Rentals{{ total }} Euro</h2>
+  } @else {
+  <h2 class="lbl-title">Rental summary</h2>
+  }
+
+  <div style="display: flex; margin-bottom: 100px">
+    <div style="margin: auto; display: flex">
+      <div style="margin-right: 50px">
+        @for (product of products; track product.id) {
+        <div style="padding-top: 10px; padding-bottom: 10px">
+          <div class="product">
+            <img class="image-preview" [src]="product.images[0].imageUrl" />
+
+            <div class="product-info-container">
+              <p class="lbl-name">{{ product.name }}</p>
+
+              <p class="lbl-description">{{ product.description }}</p>
+            </div>
+
+            <div style="display: flex">
+              <p class="lbl-price">{{ product.price | currency: 'EUR' : 'symbol' }}</p>
+            </div>
+
+            <div style="display: flex">
+              <button mat-icon-button class="btn-delete" (click)="onDeleteProduct(product.id)">
+                <!-- https://fonts.google.com/icons?icon.size=24&icon.color=%23e8eaed-->
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div class="product-divider"></div>
+        </div>
+        } @empty {
+        <p>No products!</p>
+        }
+      </div>
+
+      <mat-card class="card-summary mat-elevation-z24">
+        <mat-card-content>
+          <h4></h4>
+
+          <div class="div-transport">
+            <mat-icon fontIcon="local_shipping" style="color: green"></mat-icon>
+            <p style="font-weight: bold; color: green;">Free shipping</p>
+          </div>
+
+          <div>
+            <p style="font-style: italic; font-size: 12px; text-align: justify">Enjoy free shipping on
+              any order! Regardless of the value of the product or your destination, we will deliver it
+              directly to you, at no additional cost. Order now and save time and money</p>
+          </div>
+
+          <mat-form-field>
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate placeholder="Start date">
+              <input matEndDate placeholder="End date">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+
+          <mat-form-field style="width: 100%;">
+            <mat-label>Order Details</mat-label>
+            <textarea matInput placeholder="Ex. Call before ..." [(ngModel)]="details"></textarea>
+          </mat-form-field>
+
+          <div class="div-total">
+            <p class="lbl-text">Total with TVA</p>
+            <p class="lbl-total">{{ total | currency: 'EUR' : 'symbol' }}</p>
+          </div>
+
+          <div style="display:flex;">
+            <button class="btn-submit" [ngStyle]="products.length == 0 ?{'opacity': 0.3} : { 'opacity' : 1} "
+              mat-raised-button [disabled]="products.length == 0" (click)="onCheckout()">Complete Order</button>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+</div>
